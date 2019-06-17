@@ -208,6 +208,13 @@
 			remoteGlobalIDString = "RxSwift::RxSwift";
 			remoteInfo = RxSwift;
 		};
+		43C1F37122B771F600D17127 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "ViewModelBindable::ViewModelBindableTests";
+			remoteInfo = ViewModelBindableTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -747,6 +754,7 @@
 			buildPhases = (
 				OBJ_353 /* Sources */,
 				OBJ_359 /* Frameworks */,
+				43C1F37222B775F100D17127 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -807,6 +815,27 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43C1F37222B775F100D17127 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_190 /* Sources */ = {
@@ -1015,7 +1044,7 @@
 		OBJ_372 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ViewModelBindable::ViewModelBindableTests" /* ViewModelBindableTests */;
-			targetProxy = "ViewModelBindable::ViewModelBindableTests" /* ViewModelBindableTests */;
+			targetProxy = 43C1F37122B771F600D17127 /* PBXContainerItemProxy */;
 		};
 		OBJ_383 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
