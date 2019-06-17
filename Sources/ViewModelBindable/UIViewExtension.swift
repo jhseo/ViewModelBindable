@@ -1,5 +1,5 @@
 //
-//  UIViewControllerExtension.swift
+//  UIViewExtension.swift
 //  ViewModelBindable
 //
 //  The MIT License (MIT)
@@ -26,24 +26,23 @@
 //
 
 import Foundation
+import UIKit
 
-private func swizzle(_ vc: UIViewController.Type) {
-    [
-        (#selector(vc.viewDidLoad), #selector(vc.swizzle_viewDidLoad)),
-        (#selector(vc.viewWillAppear(_:)), #selector(vc.swizzle_viewWillAppear(_:))),
-        (#selector(vc.traitCollectionDidChange(_:)), #selector(vc.swizzle_traitCollectionDidChange(_:)))
-    ].forEach { original, swizzled in
+private func swizzle(_ v: UIView.Type) {
 
-            let originalMethod = class_getInstanceMethod(vc, original)
-            let swizzledMethod = class_getInstanceMethod(vc, swizzled)
+    [(#selector(v.traitCollectionDidChange(_:)), #selector(v.swizzle_traitCollectionDidChange(_:)))]
+        .forEach { original, swizzled in
 
-            let didAddViewDidLoadMethod = class_addMethod(vc,
+            let originalMethod = class_getInstanceMethod(v, original)
+            let swizzledMethod = class_getInstanceMethod(v, swizzled)
+
+            let didAddViewDidLoadMethod = class_addMethod(v,
                                                           original,
                                                           method_getImplementation(swizzledMethod!),
                                                           method_getTypeEncoding(swizzledMethod!))
 
             if didAddViewDidLoadMethod {
-                class_replaceMethod(vc,
+                class_replaceMethod(v,
                                     swizzled,
                                     method_getImplementation(originalMethod!),
                                     method_getTypeEncoding(originalMethod!))
@@ -55,7 +54,7 @@ private func swizzle(_ vc: UIViewController.Type) {
 
 private var hasSwizzled = false
 
-extension UIViewController {
+extension UIView {
     final public class func doAwesomeSwizzleStuff() {
         guard !hasSwizzled else { return }
 
@@ -63,33 +62,8 @@ extension UIViewController {
         swizzle(self)
     }
 
-    @objc internal func swizzle_viewDidLoad() {
-        self.swizzle_viewDidLoad()
-        DispatchQueue.main.async { self.bindViewModel() }
-    }
-
-    @objc internal func swizzle_viewWillAppear(_ animated: Bool) {
-        self.swizzle_viewWillAppear(animated)
-
-        if !self.hasViewAppeared {
-            self.bindStyles()
-            self.hasViewAppeared = true
-        }
-    }
-
-    @objc public func swizzle_traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    @objc internal func swizzle_traitCollectionDidChange(_ previousTraitCollection: UITraitCollection) {
         self.swizzle_traitCollectionDidChange(previousTraitCollection)
         self.bindStyles()
-    }
-
-    // Helper to figure out if the `viewWillAppear` has been called yet
-    private var hasViewAppeared: Bool {
-        get { return (objc_getAssociatedObject(self, &AssociatedKeys.hasViewAppeared) as? Bool) ?? false }
-        set {
-            objc_setAssociatedObject(self,
-                                     &AssociatedKeys.hasViewAppeared,
-                                     newValue,
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
     }
 }

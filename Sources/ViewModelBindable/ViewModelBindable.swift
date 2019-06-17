@@ -26,6 +26,7 @@
 //
 
 import RxSwift
+import UIKit
 import Foundation
 
 public protocol _ObjcBindable {

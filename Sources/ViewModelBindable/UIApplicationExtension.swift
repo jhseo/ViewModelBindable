@@ -27,6 +27,7 @@
 
 import RxSwift
 import Foundation
+import UIKit
 
 extension UIApplication {
     override open var next: UIResponder? {
