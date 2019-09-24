@@ -5,10 +5,10 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
-@version = '2.0.0'
+@version = '1.0.1'
 
 Pod::Spec.new do |s|
-  s.name             = 'JHViewModelBindable'
+  s.name             = 'ViewModelBindable'
   s.version          = @version
   s.summary          = 'Super easy way to bind ViewModel'
 
@@ -22,10 +22,10 @@ Pod::Spec.new do |s|
 ViewModelBindable supports easy ViewModel binding for MVVM architecture. ViewModelBindable will inject required method for binding into your ViewController & View life-cycle. Just enjoy it!
                        DESC
 
-  s.homepage         = 'https://github.com/jhseo/ViewModelBindable'
+  s.homepage         = 'https://github.com/makesource/ViewModelBindable'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'jhseo' => 'sjh7893@gmail.com' }
-  s.source           = { :git => 'https://github.com/jhseo/ViewModelBindable.git', :tag => "v#{s.version}" }
+  s.author           = { 'makesource' => 'makesource@gmail.com' }
+  s.source           = { :git => 'https://github.com/makesource/ViewModelBindable.git', :tag => "v#{s.version}" }
 
   s.ios.deployment_target = '8.0'
 
