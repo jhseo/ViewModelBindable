@@ -31,5 +31,5 @@ ViewModelBindable supports easy ViewModel binding for MVVM architecture. ViewMod
 
   s.source_files = 'ViewModelBindable/Classes/**/*'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'RxSwift', '~> 5.0'
+  s.dependency 'RxSwift'
 end
